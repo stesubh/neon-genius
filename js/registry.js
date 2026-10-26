@@ -13,6 +13,7 @@ export const MODES = [
   { id: 'fret', section: 'play', title: 'Fret Lab', icon: '🎸', color: '#3ef0ff', file: './fret.js', fn: 'createFretLab', music: 'none', desc: 'Real guitar sound. Fretboard notes, chords and free jam.' },
 
   { id: 'numbers', section: 'learn', title: 'Number Dojo', icon: '🥋', color: '#ffb23f', file: './labs/numbers.js', fn: 'createNumberDojo', music: 'learn', desc: 'Add, subtract, multiply, divide. The smartest tricks from around the world.' },
+  { id: 'money', section: 'learn', title: 'Money & Life', icon: '💰', color: '#3dff9a', file: './labs/money.js', fn: 'createMoneyLab', music: 'learn', desc: 'Budgets, banks, UPI safety, interest, insurance, scams and your rights.' },
   { id: 'chem', section: 'learn', title: 'Chemistry Lab', icon: '⚗️', color: '#3ef0c4', file: './labs/chem.js', fn: 'createChemLab', music: 'learn', desc: '3D periodic table, atoms and a molecule builder.' },
   { id: 'bio', section: 'learn', title: 'Biology Lab', icon: '🧬', color: '#5dff8a', file: './labs/bio.js', fn: 'createBioLab', music: 'learn', desc: 'Explore a 3D cell, build DNA, discover the human body.' },
   { id: 'physics', section: 'learn', title: 'Physics Lab', icon: '🪐', color: '#4fb3ff', file: './labs/physics.js', fn: 'createPhysicsLab', music: 'learn', desc: 'Launch projectiles, play with gravity and orbits.' },

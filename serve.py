@@ -12,4 +12,7 @@ class H(http.server.SimpleHTTPRequestHandler):
 socketserver.TCPServer.allow_reuse_address = True
 with socketserver.ThreadingTCPServer(('127.0.0.1', PORT), H) as s:
     print(f'Neon Genius running at http://localhost:{PORT}  (Ctrl+C to stop)')
-    s.serve_forever()
+    try:
+        s.serve_forever()
+    except KeyboardInterrupt:
+        print('\nStopped. Bye!')
