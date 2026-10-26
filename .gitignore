@@ -1,0 +1,12 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+__pycache__/
+
+# local update bundles
+*.tgz
+_old_updates/
+
+# node (only used for tests)
+node_modules/

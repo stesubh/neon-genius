@@ -1,0 +1,97 @@
+// Hand-picked chess puzzles, ordered easy to hard. Every puzzle is verified by tests/chess-puzzles test:
+// the key move is legal, mates really mate, and the key is the unique (or clearly best) move.
+// line: moves in SAN. Player moves are at even indices, the computer's replies at odd indices.
+// For mate puzzles the player's final move may be any move that checkmates.
+// alts: { index: [san] } other moves that are just as good at that step.
+
+export const PUZZLE_SETS = [
+  { id: 'mate1', title: 'Mate in 1', icon: '🎯', color: '#3dff9a', desc: 'One move. Checkmate. Can you spot it?' },
+  { id: 'win', title: 'Win Material', icon: '💎', color: '#3ef0ff', desc: 'Forks, pins, skewers and free pieces.' },
+  { id: 'mate2', title: 'Mate in 2', icon: '🔥', color: '#ff3fa4', desc: 'Think two moves ahead. Sacrifices allowed!' },
+];
+
+export const PUZZLES = [
+  // ---------------- Mate in 1 ----------------
+  { id: 'm1-backrank', set: 'mate1', stars: 1, title: 'Back Rank', fen: '6k1/5ppp/8/8/8/8/5PPP/4R1K1 w - - 0 1', line: ['Re8#'],
+    explain: 'The black king is trapped behind its own pawns. A rook on the back rank is checkmate. This is the famous back rank mate.' },
+  { id: 'm1-corner', set: 'mate1', stars: 1, title: 'Corner Trap', fen: '7k/8/6K1/8/8/8/8/1Q6 w - - 0 1', line: ['Qb8#'],
+    explain: 'Your king guards g7 and h7. The queen checks along the 8th rank and covers g8. The king has nowhere to go.' },
+  { id: 'm1-promote', set: 'mate1', stars: 1, title: 'Promote and Mate', fen: 'k7/7P/1K6/8/8/8/8/8 w - - 0 1', line: ['h8=Q#'],
+    explain: 'The pawn reaches the last rank and becomes a queen with check. Your king covers a7 and b7, so it is mate.' },
+  { id: 'm1-smother', set: 'mate1', stars: 1, title: 'Smothered!', fen: '6rk/6pp/8/6N1/8/8/8/6K1 w - - 0 1', line: ['Nf7#'],
+    explain: 'The king is smothered by its own rook and pawns. A knight check can not be blocked, so Nf7 is mate.' },
+  { id: 'm1-pawnqueen', set: 'mate1', stars: 1, title: 'Queen and Pawn', fen: '6k1/5p1p/5PpQ/8/8/8/8/6K1 w - - 0 1', line: ['Qg7#'],
+    explain: 'The queen lands right next to the king on g7. The f6 pawn protects her, so the king can not capture.' },
+  { id: 'm1-scholar', set: 'mate1', stars: 1, title: "Scholar's Mate", fen: 'r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4', line: ['Qxf7#'],
+    explain: 'f7 is only guarded by the king. Queen and bishop attack it together. Qxf7 is checkmate. Watch out for this trap in your own games!' },
+  { id: 'm1-fool', set: 'mate1', stars: 1, title: "Fool's Mate", fen: 'rnbqkbnr/pppp1ppp/8/4p3/6P1/5P2/PPPPP2P/RNBQKBNR b KQkq g3 0 2', line: ['Qh4#'],
+    explain: 'You are Black. White weakened the king by moving the f and g pawns. Qh4 is checkmate on move two, the fastest mate possible.' },
+  { id: 'm1-blackrank', set: 'mate1', stars: 1, title: 'Black Strikes Back', fen: '1r4k1/5ppp/8/8/8/8/5PPP/6K1 b - - 0 1', line: ['Rb1#'],
+    explain: 'You are Black. The white king has no escape square on the second rank. Rb1 is a back rank mate.' },
+  { id: 'm1-arabian', set: 'mate1', stars: 2, title: 'Arabian Mate', fen: '7k/R7/5N2/8/8/8/8/6K1 w - - 0 1', line: ['Rh7#'],
+    explain: 'Rook and knight teamwork. The knight protects the rook on h7 and also covers g8. One of the oldest known mates.' },
+  { id: 'm1-anastasia', set: 'mate1', stars: 2, title: "Anastasia's Mate", fen: '8/4N1pk/8/8/8/8/8/K2R4 w - - 0 1', line: ['Rh1#'],
+    explain: 'The knight on e7 covers g8 and g6. The rook checks down the h-file. The pawn on g7 blocks the last escape.' },
+  { id: 'm1-epaulette', set: 'mate1', stars: 2, title: 'Epaulette Mate', fen: '3rkr2/8/8/8/8/8/Q7/6K1 w - - 0 1', line: ['Qe6#'],
+    explain: 'The two rooks sit on the king\'s shoulders like epaulettes and block d8 and f8. Qe6 covers d7, e7 and f7.' },
+  { id: 'm1-legal', set: 'mate1', stars: 2, title: "Legal's Mate", fen: 'rn1q1bnr/ppp1kB1p/3p2p1/4N3/4P3/2N5/PPPP1PPP/R1BbK2R w KQ - 1 7', line: ['Nd5#'],
+    explain: 'White gave away the queen on purpose! Bishop, knight and knight now trap the king. Nd5 is mate.' },
+  { id: 'm1-greek', set: 'mate1', stars: 2, title: 'Bishop Battery', fen: 'r1bq1rk1/pppp1ppp/2n5/2b1p2Q/8/3B4/PPPP1PPP/RNB1K1NR w KQ - 0 1', line: ['Qxh7#'],
+    explain: 'The bishop on d3 aims at h7. The queen takes h7 with check and the bishop protects her. Mate!' },
+  { id: 'm1-knightqueen', set: 'mate1', stars: 2, title: 'Knight Support', fen: '6k1/5ppp/8/8/6nq/8/5PPP/5RK1 b - - 0 1', line: ['Qxh2#'],
+    explain: 'You are Black. The knight on g4 protects h2. The queen takes h2 with check, and the rook on f1 blocks the king\'s escape.' },
+  { id: 'm1-boden', set: 'mate1', stars: 3, title: "Boden's Mate", fen: '2kr4/p2n4/8/8/5B2/3B4/8/6K1 w - - 0 1', line: ['Ba6#'],
+    explain: 'Two bishops on crossing diagonals. The f4 bishop covers b8 and c7, the other one checks from a6. Black\'s own pieces block d7 and d8.' },
+
+  // ---------------- Win material ----------------
+  { id: 'w-free', set: 'win', stars: 1, title: 'Free Knight', fen: '4k3/pp6/8/3n4/8/8/PP6/3RK3 w - - 0 1', line: ['Rxd5'],
+    explain: 'The knight on d5 has no defenders. Always check: can I capture something for free?' },
+  { id: 'w-freeq', set: 'win', stars: 1, title: 'Hungry Knight', fen: '4k3/pp6/8/4q3/8/5N2/PP6/4K3 w - - 0 1', line: ['Nxe5'],
+    explain: 'The black queen is unprotected and your knight can reach her. Knights attack in sneaky L shapes!' },
+  { id: 'w-royalfork', set: 'win', stars: 1, title: 'Royal Fork', fen: 'r3k3/pp6/8/1N6/8/8/PP6/4K3 w - - 0 1', line: ['Nc7+', 'Kd7', 'Nxa8'],
+    explain: 'Nc7 checks the king and attacks the rook at the same time. The king must move, then you take the rook. That is a fork.' },
+  { id: 'w-kqfork', set: 'win', stars: 1, title: 'Family Fork', fen: '6k1/5ppp/2q5/3N4/8/8/5PPP/6K1 w - - 0 1', line: ['Ne7+', 'Kf8', 'Nxc6'],
+    explain: 'Ne7 forks king and queen. A knight fork on the king is deadly because the king must move first.' },
+  { id: 'w-queenfork', set: 'win', stars: 2, title: 'Queen Fork', fen: '1r5k/p6p/6p1/8/3p4/8/5PPP/4Q1K1 w - - 0 1', line: ['Qe5+', 'Kg8', 'Qxb8+'],
+    explain: 'Qe5 checks along the long diagonal and also hits the rook on b8. One move, two targets.' },
+  { id: 'w-blackfork', set: 'win', stars: 2, title: 'Black Knight Fork', fen: '4k3/4pppp/8/8/1n6/8/5PPP/R3K3 b - - 0 1', line: ['Nc2+', 'Kd2', 'Nxa1'],
+    explain: 'You are Black. Nc2 checks the king and attacks the rook in the corner. Corners are fork magnets!' },
+  { id: 'w-bishopfork', set: 'win', stars: 2, title: 'Bishop Fork', fen: '6k1/6pp/8/8/8/5B2/r4PPP/6K1 w - - 0 1', line: ['Bd5+', 'Kf8', 'Bxa2'],
+    explain: 'Bishops fork too. From d5 the bishop checks the king and attacks the rook on a2.' },
+  { id: 'w-pawnfork', set: 'win', stars: 2, title: 'Pawn Fork', fen: 'r5k1/pp4pp/8/2n1b3/8/2PP4/PP4PP/R4BK1 w - - 0 1', line: ['d4'],
+    explain: 'The little pawn attacks the knight and the bishop at once, and the c3 pawn protects it. Black can only save one.' },
+  { id: 'w-pin', set: 'win', stars: 2, title: 'Pin the Queen', fen: '4k3/pp6/4q3/8/8/2N5/PP1K4/R7 w - - 0 1', line: ['Re1', 'Qxe1+', 'Kxe1'],
+    explain: 'Re1 pins the queen to her king. She can not step away, so Black has to give her up for your rook.' },
+  { id: 'w-skewer', set: 'win', stars: 2, title: 'Skewer', fen: '8/pp3q2/8/3k4/8/8/6PP/1B4K1 w - - 0 1', line: ['Ba2+', 'Ke5', 'Bxf7'],
+    explain: 'A skewer is a pin in reverse. The king is in front and must move, then the bishop takes the queen behind it.' },
+  { id: 'w-rookskewer', set: 'win', stars: 2, title: 'Rook Skewer', fen: '8/8/8/4k2q/8/8/8/R5K1 w - - 0 1', line: ['Ra5+', 'Kf4', 'Rxh5'],
+    explain: 'Ra5 checks along the 5th rank. When the king steps aside, the queen behind it is lost.' },
+  { id: 'w-discovered', set: 'win', stars: 3, title: 'Discovered Check', fen: 'q3k3/5ppp/8/8/8/8/4BPPP/4R1K1 w - - 0 1', line: ['Bf3+', 'Qe4', 'Bxe4'], alts: { 2: ['Rxe4+'] },
+    explain: 'The bishop moves out of the way and the rook gives check. At the same time the bishop attacks the queen. Even blocking with the queen does not help!' },
+  { id: 'w-tradefork', set: 'win', stars: 3, title: 'Trade, Then Fork', fen: '3qk2r/ppp2ppp/8/6N1/8/8/PPP2PPP/3QK3 w - - 0 1', line: ['Qxd8+', 'Kxd8', 'Nxf7+', 'Ke8', 'Nxh8'],
+    explain: 'First trade queens to pull the king to d8. Now Nxf7 is a fork of king and rook. Planning two steps ahead wins.' },
+
+  // ---------------- Mate in 2 ----------------
+  { id: 'm2-arabian', set: 'mate2', stars: 1, title: 'Quiet Knight', fen: '7k/R7/8/p7/4N3/8/8/6K1 w - - 0 1', line: ['Nf6', 'a4', 'Rh7#'],
+    explain: 'No check needed! Nf6 covers g8 and h7, so next move Rh7 is mate. Black can not stop it.' },
+  { id: 'm2-backrank', set: 'mate2', stars: 1, title: 'Deflection', fen: '3q2k1/5ppp/8/8/8/8/4QPPP/4R1K1 w - - 0 1', line: ['Qe8+', 'Qxe8', 'Rxe8#'],
+    explain: 'Your queen jumps into e8 with check. Black must take her, and then your rook mates on the back rank.' },
+  { id: 'm2-blackback', set: 'mate2', stars: 1, title: 'Black Sacrifice', fen: '4r1k1/4qppp/8/8/8/8/5PPP/3Q2K1 b - - 0 1', line: ['Qe1+', 'Qxe1', 'Rxe1#'],
+    explain: 'You are Black. Same idea as before: sacrifice the queen on e1, then the rook mates on the back rank.' },
+  { id: 'm2-smother', set: 'mate2', stars: 2, title: 'Smothered Sacrifice', fen: 'r6k/6pp/7N/8/2Q5/8/8/6K1 w - - 0 1', line: ['Qg8+', 'Rxg8', 'Nf7#'],
+    explain: 'Qg8 check! The king can not take because the knight guards g8, so the rook must. Now the king is smothered: Nf7 mate.' },
+  { id: 'm2-blacksmother', set: 'mate2', stars: 2, title: 'Black Smother', fen: '6k1/5ppp/8/2q5/8/7n/6PP/R6K b - - 0 1', line: ['Qg1+', 'Rxg1', 'Nf2#'],
+    explain: 'You are Black. The queen sacrifice on g1 forces the rook to block the king in. Then the knight mates on f2.' },
+  { id: 'm2-anastasia', set: 'mate2', stars: 2, title: 'Anastasia Sacrifice', fen: '5r1k/4Nppp/8/7Q/8/3R4/5PPP/6K1 w - - 0 1', line: ['Qxh7+', 'Kxh7', 'Rh3#'],
+    explain: 'Qxh7 opens the h-file and drags the king forward. Then Rh3 is Anastasia\'s mate: the knight covers g8 and g6.' },
+  { id: 'm2-threat', set: 'mate2', stars: 2, title: 'Unstoppable Threat', fen: '5rk1/5p1p/5Bp1/8/8/8/3Q1PPP/6K1 w - - 0 1', line: ['Qh6', 'Rc8', 'Qg7#'],
+    explain: 'Qh6 threatens Qg7 mate, protected by the bishop. Black has no way to defend g7 in time.' },
+  { id: 'm2-legal', set: 'mate2', stars: 3, title: "Legal's Trap", fen: 'rn1qkbnr/ppp2p1p/3p2p1/4N3/2B1P3/2N5/PPPP1PPP/R1BbK2R w KQkq - 0 6', line: ['Bxf7+', 'Ke7', 'Nd5#'],
+    explain: 'Black just took your queen. Do not take back! Bxf7+ forces Ke7, then Nd5 is mate. Development beats material.' },
+  { id: 'm2-boden', set: 'mate2', stars: 3, title: "Boden's Sacrifice", fen: '2kr4/pp1n4/2n5/8/5B2/3B1Q2/8/6K1 w - - 0 1', line: ['Qxc6+', 'bxc6', 'Ba6#'],
+    explain: 'Qxc6 check rips open the king. After bxc6 the two bishops deliver Boden\'s mate from a6 and f4.' },
+  { id: 'm2-opera', set: 'mate2', stars: 3, title: 'The Opera Game', fen: '4kb1r/p2n1ppp/4q3/4p1B1/4P3/1Q6/PPP2PPP/2KR4 w k - 0 16', line: ['Qb8+', 'Nxb8', 'Rd8#'],
+    explain: 'From a famous game played in 1858 at the opera in Paris. Qb8 check! The knight must take, and Rd8 is mate.' },
+];
+
+export const puzzleById = (id) => PUZZLES.find((p) => p.id === id);
